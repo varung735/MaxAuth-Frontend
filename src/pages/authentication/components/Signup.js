@@ -1,9 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { signup } from '../api_calls/calls';
 
 function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  async function handleSubmit() {
+    const user = await signup(name, email, password);
+    setName('');
+    setEmail('');
+    setPassword('');
+    console.log(user);
+  }
 
   return (
     <div className='p-5 bg-white'>
@@ -27,11 +36,11 @@ function Signup() {
         <div className='flex flex-col'>
           <label htmlFor="password" className='font-mont text-sm mb-1'>Password</label>
           <input name='password' type="password" className='p-2 border border-gray-400 rounded-md' placeholder='Enter Your Password Here..'
-           value={password} onChange={(e) => {setPassword(e.target.password)}} />
+           value={password} onChange={(e) => {setPassword(e.target.value)}} />
         </div>
 
         {/* Submit Button */}
-        <button className='w-full py-2 bg-blue rounded-md'>SUBMIT</button>
+        <button className='w-full py-2 bg-blue rounded-md' onClick={() => {handleSubmit()}}>SUBMIT</button>
       </div>
 
       {/* Separator */}

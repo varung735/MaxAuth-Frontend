@@ -1,11 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import {login} from '../api_calls/calls';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  function handleSubmit() {
+  async function handleSubmit() {
+    const user = await login(email, password);
 
+    setEmail('');
+    setPassword('');
+
+    console.log(user);
   }
 
   return (
@@ -15,7 +21,7 @@ function Login() {
         {/* Email Input Form */}
         <div className='flex flex-col'>
           <label htmlFor="email" className='font-mont text-sm mb-1'>Email</label>
-          <input name='email' type="email" className='p-2 border border-gray-400 rounded-md' placeholder='Enter Your Name Here..'
+          <input name='email' type="email" className='p-2 border border-gray-400 rounded-md' placeholder='Enter Your Email Here..'
            value={email} onChange={(e) => {setEmail(e.target.value)}} />
         </div>
 
@@ -23,11 +29,11 @@ function Login() {
         <div className='flex flex-col'>
           <label htmlFor="password" className='font-mont text-sm mb-1'>Password</label>
           <input name='password' type="password" className='p-2 border border-gray-400 rounded-md' placeholder='Enter Your Password Here..'
-           value={password} onChange={(e) => {setPassword(e.target.password)}} />
+           value={password} onChange={(e) => {setPassword(e.target.value)}} />
         </div>
 
         {/* Submit Button */}
-        <button className='w-full py-2 bg-blue rounded-md' onClick={handleSubmit()}>SUBMIT</button>
+        <button className='w-full py-2 bg-blue rounded-md' onClick={() => {handleSubmit()}}>SUBMIT</button>
       </div>
 
       {/* Separator */}
