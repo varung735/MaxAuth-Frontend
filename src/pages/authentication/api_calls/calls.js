@@ -19,3 +19,33 @@ export async function signup(name, email, password) {
 
     return response.user;
 }
+
+export async function sendEmailVerificationToken(email) {
+    const response = await api_requests.post_request(routes.verifyEmailLink, {
+        email: email
+    });
+
+    return response.token;
+}
+
+export async function verifyEmail(token, otp) {
+    const response = await api_requests.get_request(`${routes.verifyEmail}?token=${token}&otp=${otp}`);
+
+    return response;
+}
+
+export async function sendForgetPasswordToken(email) {
+    const response = await api_requests.post_request(routes.resetPasswordToken, {
+        email: email
+    });
+
+    return response.token;
+}
+
+export async function resetPassword(password, token, otp) {
+    const response = await api_requests.post_request(`${routes.resetPassword}?token=${token}&otp=${otp}`, {
+        password: password
+    });
+
+    return response;
+}

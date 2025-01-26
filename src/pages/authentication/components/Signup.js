@@ -1,17 +1,26 @@
 import React, { useState } from 'react';
-import { signup } from '../api_calls/calls';
+import { signup, sendEmailVerificationToken } from '../api_calls/calls';
+import { useNavigate } from 'react-router-dom';
 
-function Signup() {
+function Signup({ verifyEmail }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   async function handleSubmit() {
     const user = await signup(name, email, password);
     setName('');
     setEmail('');
     setPassword('');
-    console.log(user);
+
+    if(user.isEmailVerified) {
+      navigate('/dashboard');
+    }
+    else{
+      const token = await sendEmailVerificationToken(email);
+      verifyEmail(token);
+    }
   }
 
   return (

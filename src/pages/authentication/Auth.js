@@ -2,9 +2,19 @@ import React, { useState } from 'react';
 import Navbar from '../../common_components/Navbar';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import EmailVerification from './components/EmailVerification';
+import ResetPassword from './components/ResetPassword';
 
 function Auth() {
   const [toggle, setToggle] = useState('login');
+  
+  function verifyEmail() {
+    setToggle('email_verification');
+  }
+
+  function resetPassword() {
+    setToggle('reset_password');
+  }
 
   return (
     <div className='min-h-screen flex flex-col bg-authentication bg-cover bg-center bg-no-repeat'>
@@ -38,8 +48,10 @@ function Auth() {
 
           {/* Input Fields and Button */}
           <div>
-            {toggle === 'signup' && <Signup />}
-            {toggle === 'login' && <Login />}
+            { toggle === 'signup' && (<Signup verifyEmail={verifyEmail}/>) }
+            { toggle === 'login' && (<Login verifyEmail={verifyEmail} resetPassword={resetPassword} />) }
+            { toggle === 'email_verification' && (<EmailVerification />) }
+            { toggle === 'reset_password' && (<ResetPassword />) }
           </div>
         </div>
       </div>

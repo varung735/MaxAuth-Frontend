@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {login} from '../api_calls/calls';
 
-function Login() {
+function Login({ verifyEmail, resetPassword }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  async function forgotPassword() {
+    resetPassword();
+  }
 
   async function handleSubmit() {
     const user = await login(email, password);
 
+    if(user.isEmailVerified) {
+      navigate('/dashboard')
+    }
+    else {
+      verifyEmail();
+    }
+
     setEmail('');
     setPassword('');
-
-    console.log(user);
   }
 
   return (
@@ -34,6 +45,9 @@ function Login() {
 
         {/* Submit Button */}
         <button className='w-full py-2 bg-blue rounded-md' onClick={() => {handleSubmit()}}>SUBMIT</button>
+        
+        {/* Forgot Password Link */}
+        <p className='text-center cursor-pointer' onClick={() => {forgotPassword()}}>Forgot Password</p>
       </div>
 
       {/* Separator */}
