@@ -1,21 +1,46 @@
 import React, { useState } from 'react';
 import { sendEmailVerificationToken, verifyEmail } from '../api_calls/calls';
+import { useNavigate } from 'react-router-dom';
 
-function EmailVerification() {
+function EmailVerification({ snackBarState, snackBarMessage, popSnackBar }) {
     const [email, setEmail] = useState();
     const [isTokenReceived, setIsTokenReceived] = useState(false);
     const [token, setToken] = useState();
     const [otp, setOtp] = useState();
+    const navigate = useNavigate();
 
     async function getEmailVerificationToken() {
-        const token = await sendEmailVerificationToken(email);
-        setIsTokenReceived(true);
-        setToken(token);
+        const response = await sendEmailVerificationToken(email);
+
+        if(response.success) {
+            snackBarState(response.success);
+            snackBarMessage(response.message);
+            setIsTokenReceived(response.success);
+            setToken(response.token);
+            popSnackBar();
+            navigate('/dashboard');
+        }
+        else {
+            snackBarState(response.success);
+            snackBarMessage("Cannot Verify Email");
+            setIsTokenReceived(response.success);
+            popSnackBar();
+        }
     }
 
     async function handleSubmit() {
-        const user = await verifyEmail(token, otp);
-        console.log(user);
+        const response = await verifyEmail(token, otp);
+
+        if(response.success) {
+            snackBarState(response.success);
+            snackBarMessage(response.message);
+            popSnackBar();
+        } 
+        else {
+            snackBarState(response.success);
+            snackBarMessage(response.message);
+            popSnackBar();
+        }
     }
 
     return (
@@ -45,7 +70,7 @@ function EmailVerification() {
                             value={otp} onChange={(e) => { setOtp(e.target.value) }} />
 
                         {/* Submit Button */}
-                        <button className='w-full py-2 bg-blue rounded-md' onClick={() => { handleSubmit() }}>VERIFY</button>
+                        <button className='mt-2 w-full py-2 bg-blue rounded-md' onClick={() => { handleSubmit() }}>VERIFY</button>
                     </div>
                 ) }
 

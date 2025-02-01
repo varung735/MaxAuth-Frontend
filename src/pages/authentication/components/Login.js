@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {login} from '../api_calls/calls';
 
-function Login({ verifyEmail, resetPassword }) {
+function Login({ verifyEmail, resetPassword, snackBarState, snackBarMessage, popSnackBar }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -12,17 +12,28 @@ function Login({ verifyEmail, resetPassword }) {
   }
 
   async function handleSubmit() {
-    const user = await login(email, password);
+    const response = await login(email, password);
 
-    if(user.isEmailVerified) {
-      navigate('/dashboard')
+    if(response.success) {
+      snackBarState(response.success);
+      snackBarMessage(response.message);
+      popSnackBar();
+      
+      if(response.user.isEmailVerified) {
+        setEmail('');
+        setPassword('');
+        navigate('/dashboard');
+      }
+      else {
+        verifyEmail();
+      }
     }
     else {
-      verifyEmail();
+      snackBarState(response.success);
+      snackBarMessage(response.message);
+      popSnackBar();
     }
 
-    setEmail('');
-    setPassword('');
   }
 
   return (

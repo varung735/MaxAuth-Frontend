@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { sendForgetPasswordToken, resetPassword } from '../api_calls/calls';
 
-function ResetPassword() {
+function ResetPassword({ setToggle, snackBarState, snackBarMessage, popSnackBar }) {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [conPassword, setConPassword] = useState();
@@ -10,19 +10,36 @@ function ResetPassword() {
     const [otp, setOtp] = useState();
 
     async function getForgotPasswordToken() {
-        const token = await sendForgetPasswordToken(email);
+        const response = await sendForgetPasswordToken(email);
         setIsTokenReceived(true);
-        setToken(token);
+        setToken(response.token);
     }
 
     async function handleSubmit() {
         if(password === conPassword) {
-            const user = await resetPassword(password, token, otp);
+            const response = await resetPassword(password, token, otp);
             
-            console.log(user);
+            if(response.success) {
+                snackBarState(response.success);
+                snackBarMessage(response.message);
+                popSnackBar();
+                setIsTokenReceived(!isTokenReceived);
+                setToggle('login');
+            }
+            else {
+                snackBarState(response.success);
+                snackBarMessage(response.message);
+                popSnackBar();
+                setOtp("");
+                setPassword("");
+                setConPassword("");
+                setIsTokenReceived(!isTokenReceived);
+            }
         }
         else {
-            throw new Error("Passwords should match with each other");
+            snackBarState(false);
+            snackBarMessage('Passwords Dont Match');
+            popSnackBar();
         }
     }
 
@@ -36,7 +53,10 @@ function ResetPassword() {
                 {/* Email Input Form */}
                 <div className='flex flex-col'>
                     <label htmlFor="email" className='font-mont text-sm mb-1'>Email</label>
-                    <input name='email' type="email" className='p-2 border border-gray-400 rounded-md' placeholder='Enter Your Email Here..'
+                    <input name='email' 
+                        type="email" 
+                        className='p-2 border border-gray-400 rounded-md' 
+                        placeholder='Enter Your Email Here..'
                         value={email} onChange={(e) => { setEmail(e.target.value) }} />
                 </div>
 
@@ -50,21 +70,33 @@ function ResetPassword() {
                         {/* Otp Input Form */}
                         <div className='flex flex-col'>
                             <label htmlFor="otp" className='font-mont text-sm mb-1'>OTP</label>
-                            <input name='otp' type="number" className='p-2 border border-gray-400 rounded-md' placeholder='Enter Your OTP your received in email'
-                                value={otp} onChange={(e) => { setOtp(e.target.value) }} />
+                            <input name='otp' 
+                                type="number" 
+                                className='p-2 border border-gray-400 rounded-md' 
+                                placeholder='Enter Your OTP your received in email'
+                                value={otp} 
+                                onChange={(e) => { setOtp(e.target.value) }} 
+                            />
                         </div>
                         
                         {/* Password Input Form */}
                         <div className='flex flex-col'>
                             <label htmlFor="password" className='font-mont text-sm mb-1'>Password</label>
-                            <input name='password' type="password" className='p-2 border border-gray-400 rounded-md' placeholder='Enter Your OTP your received in email'
-                                value={password} onChange={(e) => { setPassword(e.target.value) }} />
+                            <input name='password' 
+                                type="password" 
+                                className='p-2 border border-gray-400 rounded-md' 
+                                placeholder='Password'
+                                value={password} onChange={(e) => { setPassword(e.target.value) }} 
+                            />
                         </div>
                         
                         {/* Confirm Password Input Form */}
                         <div className='flex flex-col'>
                             <label htmlFor="conPassword" className='font-mont text-sm mb-1'>Confirm Password</label>
-                            <input name='conPassword' type="password" className='p-2 border border-gray-400 rounded-md' placeholder='Enter Your OTP your received in email'
+                            <input name='conPassword' 
+                                type="password" 
+                                className='p-2 border border-gray-400 rounded-md' 
+                                placeholder='Confirm Password'
                                 value={conPassword} onChange={(e) => { setConPassword(e.target.value) }} />
                         </div>
 

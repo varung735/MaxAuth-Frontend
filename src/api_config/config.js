@@ -13,10 +13,16 @@ const api_requests = {
             headers: headers
         });
 
-        const res_object = await response.text();
+        let res_object;
 
-        if(!res_object.success) {
-            throw new Error(res_object.message);
+        try {
+            res_object = await response.json();
+            
+            if(!res_object.success) {
+                throw new Error(`API: ${res_object.message}`);
+            }
+        } catch (error) {
+            console.error(res_object.message);
         }
 
         return res_object;
@@ -28,10 +34,16 @@ const api_requests = {
             body: JSON.stringify(body)
         });
 
-        const res_object = await response.json();
+        let res_object;
 
-        if(!res_object.success) {
-            throw new Error(res_object.message);
+        try {
+            res_object = await response.json();
+            
+            if(!res_object.success) {
+                throw new Error(`API: ${res_object.message}`);
+            }
+        } catch (error) {
+            console.error(res_object.message);
         }
 
         return res_object;
@@ -43,10 +55,16 @@ const api_requests = {
             body: JSON.stringify(body)
         });
 
-        const res_object = await response.json();
+        let res_object;
 
-        if(!res_object.success) {
-            throw new Error(res_object.message);
+        try {
+            res_object = await response.json();
+            
+            if(!res_object.success) {
+                throw new Error(`API: ${res_object.message}`);
+            }
+        } catch (error) {
+            console.error(res_object.message);
         }
 
         return res_object;
@@ -58,10 +76,16 @@ const api_requests = {
             body: JSON.stringify(body)
         });
 
-        const res_object = await response.json();
+        let res_object;
 
-        if(!res_object.success) {
-            throw new Error(res_object.message);
+        try {
+            res_object = await response.json();
+            
+            if(!res_object.success) {
+                throw new Error(`API: ${res_object.message}`);
+            }
+        } catch (error) {
+            console.error(res_object.message);
         }
 
         return res_object;
@@ -73,10 +97,16 @@ const api_requests = {
             body: JSON.stringify(body)
         });
 
-        const res_object = await response.json();
+        let res_object;
 
-        if(!res_object.success) {
-            throw new Error(res_object.message);
+        try {
+            res_object = await response.json();
+            
+            if(!res_object.success) {
+                throw new Error(`API: ${res_object.message}`);
+            }
+        } catch (error) {
+            console.error(res_object.message);
         }
 
         return res_object;

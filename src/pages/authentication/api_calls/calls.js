@@ -7,7 +7,7 @@ export async function login(email, password) {
         password: password
     });
 
-    return response.user;
+    return response;
 }
 
 export async function signup(name, email, password) {
@@ -17,15 +17,15 @@ export async function signup(name, email, password) {
         password: password
     });
 
-    return response.user;
+    return response;
 }
 
 export async function sendEmailVerificationToken(email) {
-    const response = await api_requests.post_request(routes.verifyEmailLink, {
+    const response = await api_requests.post_request(routes.verifyEmailToken, {
         email: email
     });
 
-    return response.token;
+    return response;
 }
 
 export async function verifyEmail(token, otp) {
@@ -39,7 +39,7 @@ export async function sendForgetPasswordToken(email) {
         email: email
     });
 
-    return response.token;
+    return response;
 }
 
 export async function resetPassword(password, token, otp) {

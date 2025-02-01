@@ -4,9 +4,28 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import EmailVerification from './components/EmailVerification';
 import ResetPassword from './components/ResetPassword';
+import SnackBar from '../../state_components/snack_bar/SnackBar';
 
 function Auth() {
   const [toggle, setToggle] = useState('login');
+  const [reqSuccess, setReqSuccess] = useState();
+  const [responseMessage, setResponseMessage] = useState();
+  const [triggerSnackBar, setTriggerSnackBar] = useState(false);
+
+  function snackBarState(state) {
+    setReqSuccess(state);
+  }
+
+  function snackBarMessage(message) {
+    setResponseMessage(message);
+  }
+
+  function popSnackBar() {
+    setTriggerSnackBar(true);
+    setTimeout(() => {
+      setTriggerSnackBar(false)
+    }, 5000);
+  }
   
   function verifyEmail() {
     setToggle('email_verification');
@@ -23,6 +42,16 @@ function Auth() {
 
       {/* Body */}
       <div className='flex-grow bg-transparent_black flex justify-center items-center'>
+
+        {/* Snack Bar */}
+        { triggerSnackBar && (
+          <SnackBar 
+            success={reqSuccess} 
+            message={responseMessage} 
+            trigger={triggerSnackBar} 
+            setTrigger={setTriggerSnackBar} 
+          />
+        ) }
 
         {/* Input Fields Div */}
         <div className='flex flex-col'>
@@ -48,10 +77,38 @@ function Auth() {
 
           {/* Input Fields and Button */}
           <div>
-            { toggle === 'signup' && (<Signup verifyEmail={verifyEmail}/>) }
-            { toggle === 'login' && (<Login verifyEmail={verifyEmail} resetPassword={resetPassword} />) }
-            { toggle === 'email_verification' && (<EmailVerification />) }
-            { toggle === 'reset_password' && (<ResetPassword />) }
+            { toggle === 'signup' && (
+              <Signup 
+                verifyEmail={verifyEmail}
+                snackBarState={snackBarState}
+                snackBarMessage={snackBarMessage}
+                popSnackBar={popSnackBar}
+                />
+              ) }
+            { toggle === 'login' && (
+              <Login 
+                verifyEmail={verifyEmail} 
+                resetPassword={resetPassword}
+                snackBarState={snackBarState}
+                snackBarMessage={snackBarMessage}
+                popSnackBar={popSnackBar}
+                />
+              ) }
+            { toggle === 'email_verification' && (
+              <EmailVerification 
+                snackBarState={snackBarState}
+                snackBarMessage={snackBarMessage}
+                popSnackBar={popSnackBar}
+                />
+            ) }
+            { toggle === 'reset_password' && (
+              <ResetPassword
+                setToggle={setToggle}
+                snackBarState={snackBarState}
+                snackBarMessage={snackBarMessage}
+                popSnackBar={popSnackBar}
+                />
+            ) }
           </div>
         </div>
       </div>

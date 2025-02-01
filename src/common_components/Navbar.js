@@ -21,12 +21,20 @@ function Navbar({ parent }) {
                     <Link to={'/'} className='p-5 border-b-2 text-center font-mont font-medium text-xl'>Home</Link>
                 }
                 { 
-                    (parent === 'Home' || parent === 'Auth') && 
+                    (parent === 'Home' || parent === 'Auth' || parent === 'Dashboard') && 
                     <Link to={'/docs'} className='p-5 border-b-2 text-center font-mont font-medium text-xl'>Docs</Link>
                 }
                 { 
                     (parent === 'Home' || parent === 'Docs') && 
                     <Link to={'/auth'} className='p-5 border-b-2 text-center font-mons font-medium text-xl'>Join Us</Link>
+                }
+                { 
+                    (parent === 'Dashboard') && 
+                    <Link to={'/profile'} className='p-5 border-b-2 text-center font-mons font-medium text-xl'>Profile</Link>
+                }
+                { 
+                    (parent === 'Dashboard') && 
+                    <Link to={'/'} className='p-5 border-b-2 text-center font-mons font-medium text-xl'>Logout</Link>
                 }
             </div> }
         </div>

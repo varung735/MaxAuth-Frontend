@@ -1,25 +1,27 @@
 import React, { useState } from 'react';
-import { signup, sendEmailVerificationToken } from '../api_calls/calls';
+import { signup } from '../api_calls/calls';
 import { useNavigate } from 'react-router-dom';
 
-function Signup({ verifyEmail }) {
+function Signup({ verifyEmail, snackBarState, snackBarMessage, popSnackBar }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   async function handleSubmit() {
-    const user = await signup(name, email, password);
+    const response = await signup(name, email, password);
     setName('');
     setEmail('');
     setPassword('');
 
-    if(user.isEmailVerified) {
+    if(response.user.isEmailVerified) {
+      snackBarState(response.success);
+      snackBarMessage(response.message);
+      popSnackBar();
       navigate('/dashboard');
     }
     else{
-      const token = await sendEmailVerificationToken(email);
-      verifyEmail(token);
+      verifyEmail();
     }
   }
 
