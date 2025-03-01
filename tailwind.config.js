@@ -16,6 +16,10 @@ module.exports = {
     './src/pages/authentication/components/Login.js',
     './src/pages/authentication/components/EmailVerification.js',
     './src/pages/authentication/components/ResetPassword.js',
+    // Project Components
+    './src/pages/project/dashboard/components/InputField.js',
+    // Project Modals
+    './src/pages/project/dashboard/modals/CreateProjectModal.js',
     // State Components
     './src/state_components/snack_bar/SnackBar.js',
     './src/state_components/loader/Loader.js'

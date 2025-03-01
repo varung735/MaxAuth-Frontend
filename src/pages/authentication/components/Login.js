@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import {login} from '../api_calls/calls';
 
@@ -22,6 +23,7 @@ function Login({ verifyEmail, resetPassword, snackBarState, snackBarMessage, pop
       if(response.user.isEmailVerified) {
         setEmail('');
         setPassword('');
+        Cookies.set('token', response.token, { expires: 1 });
         navigate('/dashboard');
       }
       else {

@@ -1,19 +1,23 @@
 import config from '../env_config/config';
+import Cookies from 'js-cookie';
 
 const base_url = config.env === 'dev' ? config.local : config.prod;
 const headers = {
     'Accept': 'application/json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
+    'token': Cookies.get('token')
 }
 
 const api_requests = {
     get_request: async function(route) {
         const response = await fetch(`${base_url}/${route}`, {
             method: 'GET',
-            headers: headers
+            headers: headers,
+            credentials: 'include'
         });
 
         let res_object;
+        console.log(Cookies.get('token'));
 
         try {
             res_object = await response.json();
@@ -31,7 +35,8 @@ const api_requests = {
         const response = await fetch(`${base_url}/${route}`, {
             method: 'POST',
             headers: headers,
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
+            credentials: 'include'
         });
 
         let res_object;
@@ -52,7 +57,8 @@ const api_requests = {
         const response = await fetch(`${base_url}/${route}`, {
             method: 'PUT',
             headers: headers,
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
+            credentials: 'include'
         });
 
         let res_object;
@@ -73,7 +79,8 @@ const api_requests = {
         const response = await fetch(`${base_url}/${route}`, {
             method: 'PATCH',
             headers: headers,
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
+            credentials: 'include'
         });
 
         let res_object;
@@ -94,7 +101,8 @@ const api_requests = {
         const response = await fetch(`${base_url}/${route}`, {
             method: 'DELETE',
             headers: headers,
-            body: JSON.stringify(body)
+            body: JSON.stringify(body),
+            credentials: 'include'
         });
 
         let res_object;
