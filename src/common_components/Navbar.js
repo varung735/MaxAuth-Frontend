@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import Cookies from 'js-cookie';
 import { FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 function Navbar({ parent }) {
     const [isNavOpen, setIsNavOpen] = useState(false);
+
+    function logOut() {
+        Cookies.set('token', null);
+    }
 
     return (
         <div className='w-full bg-blue'>
@@ -34,7 +39,9 @@ function Navbar({ parent }) {
                 }
                 { 
                     (parent === 'Dashboard') && 
-                    <Link to={'/'} className='p-5 border-b-2 text-center font-mons font-medium text-xl'>Logout</Link>
+                    <Link to={'/'} className='p-5 border-b-2 text-center font-mons font-medium text-xl' onClick={() => {logOut()}}>
+                        Logout
+                    </Link>
                 }
             </div> }
         </div>

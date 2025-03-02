@@ -66,11 +66,17 @@ function Dashboard() {
 
         {/* Existing Projects */}
         <h1 className='text-2xl text-center font-medium'>Projects</h1>
-        <div className='flex flex-col'>
+        <div className='flex flex-col gap-3'>
           {projects && projects.map((project) => {
-            return <ProjectCard />
+            return <ProjectCard key={project._id}
+                    projectName={project.project_name}
+                    apiKey={project.api_key}
+                    userFields={project.required_keys}
+                    userSchema={project.project_schema}
+                    snackBarState={snackBarState}
+                    snackBarMessage={snackBarMessage}
+                    popSnackBar={popSnackBar} />
           })}
-          <ProjectCard />
         </div>
       </div>
     </div>

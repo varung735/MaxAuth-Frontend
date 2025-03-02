@@ -17,8 +17,7 @@ const api_requests = {
         });
 
         let res_object;
-        console.log(Cookies.get('token'));
-
+        
         try {
             res_object = await response.json();
             

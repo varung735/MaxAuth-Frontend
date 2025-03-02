@@ -18,6 +18,7 @@ module.exports = {
     './src/pages/authentication/components/ResetPassword.js',
     // Project Components
     './src/pages/project/dashboard/components/InputField.js',
+    './src/pages/project/dashboard/components/ProjectCard.js',
     // Project Modals
     './src/pages/project/dashboard/modals/CreateProjectModal.js',
     // State Components
@@ -29,7 +30,7 @@ module.exports = {
       'blue': '#42A5F6',
       'grey': '#f5f5f5',
       'white': '#ffffff',
-      'grey': '#494848',
+      'gray': '#494848',
       'gray-400': 'rgb(156 163 175 / var(--tw-bg-opacity, 1))',
       'transparent_black': 'rgba(0, 0, 0, 0.5)'
     },
