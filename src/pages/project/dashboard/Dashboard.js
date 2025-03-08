@@ -29,7 +29,7 @@ function Dashboard() {
 
   useEffect(() => {
     getProjects()
-      .then((response) => { console.log(response); setProjects(response.projects) })
+      .then((response) => { setProjects(response.projects) })
       .catch((error) => { console.log(error)});
   }, [modal]);
 
@@ -69,6 +69,7 @@ function Dashboard() {
         <div className='flex flex-col gap-3'>
           {projects && projects.map((project) => {
             return <ProjectCard key={project._id}
+                    _id={project._id}
                     projectName={project.project_name}
                     apiKey={project.api_key}
                     userFields={project.required_keys}

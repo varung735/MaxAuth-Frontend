@@ -15,6 +15,12 @@ export async function getProjects() {
     return response;
 }
 
+export async function getProject(id) {
+    const response = await api_requests.get_request(`${routes.get_project}?id=${id}`);
+
+    return response;
+}
+
 export async function addSchema(schema) {
     const response = await api_requests.post_request(routes.addSchema, schema);
 

@@ -34,11 +34,11 @@ function Navbar({ parent }) {
                     <Link to={'/auth'} className='p-5 border-b-2 text-center font-mons font-medium text-xl'>Join Us</Link>
                 }
                 { 
-                    (parent === 'Dashboard') && 
+                    (parent === 'Dashboard' || parent === 'ProjectDetails') && 
                     <Link to={'/profile'} className='p-5 border-b-2 text-center font-mons font-medium text-xl'>Profile</Link>
                 }
                 { 
-                    (parent === 'Dashboard') && 
+                    (parent === 'Dashboard' || parent === 'ProjectDetails') && 
                     <Link to={'/'} className='p-5 border-b-2 text-center font-mons font-medium text-xl' onClick={() => {logOut()}}>
                         Logout
                     </Link>

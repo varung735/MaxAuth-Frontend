@@ -27,7 +27,7 @@ function InputField({ id, inputType, setFieldName, setInputType, inputName, dele
 
         { collapseDropDown && <div>
           { dataTypes && dataTypes.map((type) => {
-            return <div className='border-t p-1' 
+            return <div key={dataTypes.indexOf(type) + 1} className='border-t p-1' 
                       onClick={() => {setDropDownValue(type); setInputType(id, type); setCollapseDropDown(false)}}><h1>{type}</h1></div>
           }) }
         </div> }
