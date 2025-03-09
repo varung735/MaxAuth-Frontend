@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FaListUl } from "react-icons/fa6";
 import { IoCopyOutline } from "react-icons/io5";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function ProjectCard({ _id, projectName, apiKey, userFields, userSchema, snackBarState, snackBarMessage, popSnackBar }) {
-  
+  const navigate = useNavigate();
+
   function copyToClipboard() {
     navigator.clipboard.writeText(apiKey);
     snackBarState(true);
@@ -18,7 +19,7 @@ function ProjectCard({ _id, projectName, apiKey, userFields, userSchema, snackBa
       {/* Header */}
       <div className='w-full p-4 bg-blue flex justify-between items-center'>
         <h1>{projectName}</h1>
-        <div className='p-3 bg-white'><Link to={'/details'} state={{ id: _id }}><FaListUl /></Link></div>
+        <div className='p-3 bg-white'><FaListUl onClick={() => { navigate('/details', { state: { id: _id, apiKey: apiKey } }) }}/></div>
       </div>
 
       {/* Body */}

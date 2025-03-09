@@ -26,3 +26,9 @@ export async function addSchema(schema) {
 
     return response;
 }
+
+export async function getProjectUsers(apiKey) {
+    const response = await api_requests.get_request(`${routes.getUsers}?api_key=${apiKey}`);
+
+    return response;
+}

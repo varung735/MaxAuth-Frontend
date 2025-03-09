@@ -5,6 +5,7 @@ module.exports = {
     './src/pages/home_page/HomePage.js',
     './src/pages/authentication/Auth.js',
     './src/pages/project/dashboard/Dashboard.js',
+    './src/pages/project/details/ProjectDetails.js',
     // Common Components
     './src/common_components/Navbar.js',
     './src/common_components/Footer.js',
@@ -19,6 +20,8 @@ module.exports = {
     // Project Components
     './src/pages/project/dashboard/components/InputField.js',
     './src/pages/project/dashboard/components/ProjectCard.js',
+    // Project Details Components
+    './src/pages/project/details/components/Table.js',
     // Project Modals
     './src/pages/project/dashboard/modals/CreateProjectModal.js',
     // State Components

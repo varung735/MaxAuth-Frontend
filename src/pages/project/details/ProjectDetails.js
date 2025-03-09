@@ -4,12 +4,13 @@ import SnackBar from '../../../state_components/snack_bar/SnackBar';
 import Table from './components/Table';
 import { IoCopyOutline } from 'react-icons/io5';
 import { useLocation } from 'react-router-dom';
-import { getProject } from '../dashboard/api/calls';
+import { getProject, getProjectUsers } from '../dashboard/api/calls';
 
 function ProjectDetails() {
     const location = useLocation();
-    const [project, setProject] = useState();
-    const [users, setUsers] = useState();
+    const [project, setProject] = useState({});
+    const [usersArray, setUsersArray] = useState([]);
+    const [columns, setColumns] = useState([]);
     const [reqSuccess, setReqSuccess] = useState();
     const [responseMessage, setResponseMessage] = useState();
     const [triggerSnackBar, setTriggerSnackBar] = useState(false);
@@ -29,11 +30,31 @@ function ProjectDetails() {
         }, 5000);
     }
 
+    function convertUsertoTableRows(users) {
+        const userDataArray = [];
+
+        users.forEach((user) => {
+            userDataArray.push(Object.values(user));
+        });
+
+        setUsersArray(userDataArray);
+    }
+
     useEffect(() => {
         getProject(location.state.id)
-        .then((response) => { setProject(response.project) })
+        .then((response) => { setProject(response.project); })
         .catch((error) => { console.log(error) });
-    }, []);
+
+        getProjectUsers(location.state.apiKey)
+        .then((response) => {
+            let array = Object.keys(response.users[0]);
+            array.push('Update');
+            array.push('Delete');
+            convertUsertoTableRows(response.users);
+            setColumns(array);
+         })
+        .catch((error) => { console.log(error) });
+    }, [location.state.id, location.state.apiKey]);
 
     function copyToClipboard() {
         navigator.clipboard.writeText(project.apiKey);
@@ -93,8 +114,17 @@ function ProjectDetails() {
                 </div>
 
                 {/* User Table */}
-                <div>
-                    <Table columns={project.required_keys} />
+                <div className='p-5'>
+                    { usersArray.length > 0 ? (
+                        <Table columns={columns}
+                               rows={usersArray}
+                               snackBarState={snackBarState}
+                               snackBarMessage={snackBarMessage}
+                               popSnackBar={popSnackBar}        
+                        />
+                    ) : (
+                        <h1>Loading Users</h1>
+                    ) }
                 </div>
 
             </div>
