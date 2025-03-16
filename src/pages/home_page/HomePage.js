@@ -12,22 +12,26 @@ function HomePage() {
         <Navbar parent={'Home'} />
 
         {/* Banner Section */}
-        <div className='flex flex-col'>
-          <img src={assets.homeBannerImage} alt="Home_Banner_image" />
-          <h1 className='font-mont font-semibold text-center text-2xl pb'>Secure User Authentication</h1>
-          <p className='p-5 font-roboto font-extralight text-center text-justify text-lg'>
-            Need a secure and reliable way to handle user authentication and data storage? Our web application delivers! With robust 
-            encryption, seamless integration, and scalable performance, you can protect user data and streamline your operations 
-            effortlessly. From secure logins to efficient data management, we prioritize safety and simplicity—so you can focus on 
-            growth while we handle the rest.
-          </p>
+        <div className='flex flex-col lg:flex-row'>
+          <div className='w-full lg:w-1/2'>
+            <img src={assets.homeBannerImage} alt="Home_Banner_image" className='w-full h-full'/>
+          </div>
+          <div className='lg:w-1/2 flex flex-col justify-center'>
+            <h1 className='font-mont font-semibold text-center text-2xl md:text-3xl'>Secure User Authentication</h1>
+            <p className='p-5 font-roboto font-extralight md:font-medium text-center text-justify text-lg md:text-2xl md:leading-8 lg:text-lg lg:leading-7'>
+              Need a secure and reliable way to handle user authentication and data storage? Our web application delivers! With robust 
+              encryption, seamless integration, and scalable performance, you can protect user data and streamline your operations 
+              effortlessly. From secure logins to efficient data management, we prioritize safety and simplicity—so you can focus on 
+              growth while we handle the rest.
+            </p>
+          </div>
         </div>
 
         {/* Jumbotron */}
         <div className='bg-feature bg-cover bg-center bg-no-repeat'>
           <div className='p-2 py-72 h-full w-full bg-transparent_black'>
-            <h1 className='mb-2 font-mont font-bold text-white text-xl text-center'>Secure Your Users, Simplify Your App.</h1>
-            <p className='font-roboto font-light text-white text-center text-justify'>
+            <h1 className='mb-2 font-mont font-bold text-white text-xl md:text-3xl text-center'>Secure Your Users, Simplify Your App.</h1>
+            <p className='font-roboto font-light text-white text-center text-justify md:text-2xl md:leading-8 md:p-3'>
               Experience effortless user authentication and management with our cutting-edge platform. 
               From secure logins to efficient user role handling, we provide the tools you need to protect data, 
               ensure privacy, and scale your application seamlessly. Built for developers, trusted by users—your 
@@ -38,7 +42,7 @@ function HomePage() {
 
         {/* Features */}
         <div className=''>
-          <h1 className='my-4 font-mont font-bold text-center text-3xl'>Features</h1>
+          <h1 className='my-4 md:pl-4 font-mont font-bold text-center md:text-start text-3xl md:text-4xl'>Features</h1>
           
           <div className='p-2 flex flex-col'>
             <Features imageUrl={assets.secureAuth}
@@ -70,28 +74,28 @@ function HomePage() {
 
         {/* About Us */}
         <div className='p-2'>
-          <h1 className='my-4 font-mont font-bold text-3xl text-center'>About Us</h1>
-          <p className='p-2 font-roboto text-justify'>
+          <h1 className='my-4 font-mont font-bold text-3xl text-center md:text-start md:pl-3'>About Us</h1>
+          <p className='p-2 md:p-3 font-roboto text-justify md:text-xl'>
             At the heart of modern digital experiences lies trust, security, and seamless functionality. That’s where we come in. 
             Our mission is to empower developers and businesses with an innovative platform for secure user authentication and 
             efficient user management.
           </p>
-          <p className='p-2 font-roboto text-justify'>
+          <p className='p-2 md:p-3 font-roboto text-justify md:text-xl'>
             We understand the challenges of building applications that prioritize both functionality and safety. 
             Our platform is designed to simplify this process, offering advanced features like encrypted logins, 
             user role assignments, and robust data protection. Whether you’re a small startup or a growing enterprise, 
             our scalable and flexible solution adapts to your needs.
           </p>
-          <p className='p-2 font-roboto text-justify'>
+          <p className='p-2 md:p-3 font-roboto text-justify md:text-xl'>
             With a team of experienced developers, designers, and security experts, we’re committed to creating tools 
             that are not only powerful but also easy to integrate into any application. We adhere to industry-leading 
             privacy standards to ensure your users’ data remains protected at all times.
           </p>
-          <p className='p-2 font-roboto text-justify'>
+          <p className='p-2 md:p-3 font-roboto text-justify md:text-xl'>
             Innovation, reliability, and trust are at the core of everything we do. Join us as we redefine what’s possible 
             in user management and app security.
           </p>
-          <p className='p-2 font-roboto text-justify'>Let’s build the future—securely, together.</p>
+          <p className='p-2 md:p-3 font-roboto text-justify md:text-xl'>Let’s build the future—securely, together.</p>
         </div>
 
         {/* Reach Us */}

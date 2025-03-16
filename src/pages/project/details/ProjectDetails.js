@@ -48,8 +48,7 @@ function ProjectDetails() {
         getProjectUsers(location.state.apiKey)
         .then((response) => {
             let array = Object.keys(response.users[0]);
-            array.push('Update');
-            array.push('Delete');
+            array.push('Access');
             convertUsertoTableRows(response.users);
             setColumns(array);
          })
@@ -80,7 +79,7 @@ function ProjectDetails() {
             )}
 
             {/* Page */}
-            <div className='bg-grey h-full flex flex-col'>
+            <div className='h-screen bg-grey h-full flex flex-col'>
 
                 {/* Header */}
                 <div className='p-3 flex flex-col gap-2'>

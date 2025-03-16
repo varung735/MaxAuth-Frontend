@@ -24,6 +24,7 @@ module.exports = {
     './src/pages/project/details/components/Table.js',
     // Project Modals
     './src/pages/project/dashboard/modals/CreateProjectModal.js',
+    './src/pages/project/details/modals/UpdateUserModal.js',
     // State Components
     './src/state_components/snack_bar/SnackBar.js',
     './src/state_components/loader/Loader.js'

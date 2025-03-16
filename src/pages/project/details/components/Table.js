@@ -21,8 +21,7 @@ function TableHead({ columns, rows, snackBarState, snackBarMessage, popSnackBar 
           {rows && rows.map((row) => {
             return <tr className={ rows.indexOf(row) % 2 === 0 ? 'bg-white' : 'bg-grey' } key={rows.indexOf(row)}>
               {row.map((data) => { return <td className='p-2' key={row.indexOf(data)}>{data}</td> })}
-              <td className='p-2'><button className='p-2 bg-blue'>Update</button></td>
-              <td className='p-2'><button className='p-2 bg-blue'>Delete</button></td>
+              <td className='p-2'><button className='p-2 bg-blue'>Revoke</button></td>
             </tr>
           })}
         </tbody>
