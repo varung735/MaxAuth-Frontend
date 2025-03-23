@@ -75,12 +75,12 @@ function CreateProjectModal({ modal, setModal, snackBarState, snackBarMessage, p
   return (
     <div className='h-full w-full bg-transparent_black absolute top-0 flex items-center justify-center'>
 
-        <div className='max-height-[70vh] w-[95%] bg-white'>
+        <div className='max-height-[70vh] w-[95%] md:w-2/3 lg:w-1/3 bg-white'>
 
             {/* Header */}
             <div className='flex justify-between items-center p-5 bg-blue'>
                 <h1 className='text-2xl font-medium'>Create Project</h1>
-                <FaRegCircleXmark className='h-8 w-8' onClick={() => {setModal(!modal)}} />
+                <FaRegCircleXmark className='size-8' onClick={() => {setModal(!modal)}} />
             </div>
 
             {/* Body */}

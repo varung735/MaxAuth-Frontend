@@ -5,6 +5,7 @@ import Table from './components/Table';
 import { IoCopyOutline } from 'react-icons/io5';
 import { useLocation } from 'react-router-dom';
 import { getProject, getProjectUsers } from '../dashboard/api/calls';
+import Loader from '../../../state_components/loader/Loader';
 
 function ProjectDetails() {
     const location = useLocation();
@@ -85,26 +86,28 @@ function ProjectDetails() {
                 <div className='p-3 flex flex-col gap-2'>
 
                     {/* Project Name */}
-                    <h1 className='text-2xl'>{project.project_name}</h1>
+                    <h1 className='mb-3 text-2xl md:text-3xl'>{project.project_name}</h1>
 
                     {/* Api Key */}
-                    <div className='flex flex-col gap-1'>
-                        <h1 className='text-medium'>Api Key</h1>
+                    <div className='mb-3 flex flex-col gap-1'>
+                        <h1 className='text-md lg:text-lg'>Api Key</h1>
                         <div className='p-2 bg-white flex items-center justify-between'>
-                            <h1 className='text-lg'>{project.api_key}</h1>
+                            <h1 className='text-lg md:text-xl'>{project.api_key}</h1>
                             <div className='p-1 bg-grey'>
-                                <IoCopyOutline className='h-5 w-5' onClick={() => { copyToClipboard() }} />
+                                <IoCopyOutline className='size-5 md:size-7' onClick={() => { copyToClipboard() }} />
                             </div>
                         </div>
                     </div>
 
                     {/* User Fields */}
-                    <div className='flex items-center gap-1'>
-                        <h1 className=''>User Fields</h1>
+                    <div className='flex items-center gap-1 md:gap-2'>
+                        <h1 className='text-md lg:text-lg'>User Fields</h1>
                         <div className='flex flex-wrap gap-2'>
                             {project.required_keys && project.required_keys.map((field) => {
                                 return (
-                                    <div key={project.required_keys.indexOf(field)} className='p-2 bg-white rounded-md text-md'>{field}</div>
+                                    <div key={project.required_keys.indexOf(field)} className='p-2 bg-white rounded-md text-md md:text-xl'>
+                                        {field}
+                                    </div>
                                 );
                             })}
                         </div>
@@ -122,7 +125,7 @@ function ProjectDetails() {
                                popSnackBar={popSnackBar}        
                         />
                     ) : (
-                        <h1>Loading Users</h1>
+                        <Loader />
                     ) }
                 </div>
 

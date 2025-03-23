@@ -31,7 +31,7 @@ function HomePage() {
         <div className='bg-feature bg-cover bg-center bg-no-repeat'>
           <div className='p-2 py-72 h-full w-full bg-transparent_black'>
             <h1 className='mb-2 font-mont font-bold text-white text-xl md:text-3xl text-center'>Secure Your Users, Simplify Your App.</h1>
-            <p className='font-roboto font-light text-white text-center text-justify md:text-2xl md:leading-8 md:p-3'>
+            <p className='font-roboto font-light text-white text-center text-justify md:text-2xl md:leading-8 md:p-3 lg:px-72'>
               Experience effortless user authentication and management with our cutting-edge platform. 
               From secure logins to efficient user role handling, we provide the tools you need to protect data, 
               ensure privacy, and scale your application seamlessly. Built for developers, trusted by users—your 
@@ -41,7 +41,7 @@ function HomePage() {
         </div>
 
         {/* Features */}
-        <div className=''>
+        <div>
           <h1 className='my-4 md:pl-4 font-mont font-bold text-center md:text-start text-3xl md:text-4xl'>Features</h1>
           
           <div className='p-2 flex flex-col'>
@@ -50,7 +50,7 @@ function HomePage() {
               heading={'Secure Authentication'}
               text={
                 'Protect user accounts with advanced encryption and secure login systems.' +
-                'Ensure credentials are safe from unauthorized access while providing users with a smooth and reliable experience.'
+                ' Ensure credentials are safe from unauthorized access while providing users with a smooth and reliable experience.'
               }
             /> 
             <Features imageUrl={assets.userHandling}
@@ -58,7 +58,7 @@ function HomePage() {
               heading={'Efficient User Management'}
               text={
                 'Manage users effortlessly with tools for role assignments, profile updates, and activity tracking.' + 
-                'Stay in control of your application’s user base with an intuitive and organized system.'
+                ' Stay in control of your application’s user base with an intuitive and organized system.'
               }
             /> 
             <Features imageUrl={assets.privacy}

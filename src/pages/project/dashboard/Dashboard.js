@@ -65,8 +65,8 @@ function Dashboard() {
         </div>
 
         {/* Existing Projects */}
-        <h1 className='text-2xl text-center font-medium'>Projects</h1>
-        <div className='flex flex-col gap-3'>
+        <h1 className='text-2xl md:text-3xl text-center font-medium md:text-start'>Projects</h1>
+        <div className='flex flex-col md:flex-row md:flex-wrap gap-3 md:gap-4'>
           {projects && projects.map((project) => {
             return <ProjectCard key={project._id}
                     _id={project._id}
