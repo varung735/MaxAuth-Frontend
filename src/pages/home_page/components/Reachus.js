@@ -1,13 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { sendQuery } from '../api/calls';
 
-function Reachus() {
+function Reachus({ snackBarState, snackBarMessage, popSnackBar }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState();
   const [message, setMessage] = useState('');
 
-  function handleSubmit() {
-    
+  async function handleSubmit() {
+    const response = await sendQuery({ name, email, phone, message });
+
+    snackBarState(response.success);
+    snackBarMessage(response.message);
+    popSnackBar();
+
+    setName('');
+    setEmail('');
+    setPhone('');
+    setMessage('');
   }
 
   return (
@@ -32,7 +42,7 @@ function Reachus() {
         
         {/* Phone Input Form */}
         <div className='flex flex-col'>
-          <label htmlFor="email" className='font-mont text-sm md:text-lg mb-1'>Phone</label>
+          <label htmlFor="phone" className='font-mont text-sm md:text-lg mb-1'>Phone</label>
           <input name='phone' type="number" className='p-2 border border-gray-400 rounded-md' placeholder='Enter Your Phone No Here..'
            value={phone} onChange={(e) => {setPhone(e.target.value)}} />
         </div>
@@ -41,11 +51,11 @@ function Reachus() {
         <div className='flex flex-col'>
           <label htmlFor="message" className='font-mont text-sm md:text-lg mb-1'>Message</label>
           <textarea name='message' type="text" className='p-2 border border-gray-400 rounded-md' placeholder='Enter Your Message Here..'
-           value={message} onChange={(e) => {setMessage(e.target.password)}} />
+           value={message} onChange={(e) => {setMessage(e.target.value)}} />
         </div>
 
         {/* Submit Button */}
-        <button className='w-full py-2 md:py-3 bg-blue rounded-md md:text-lg' onClick={handleSubmit()}>SUBMIT</button>
+        <button className='w-full py-2 md:py-3 bg-blue rounded-md md:text-lg' onClick={() => {handleSubmit()}}>SUBMIT</button>
       </div>
 
     </div>
