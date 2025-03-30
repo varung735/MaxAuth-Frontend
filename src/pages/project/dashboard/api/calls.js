@@ -1,9 +1,10 @@
 import api_requests from "../../../../api_config/config";
 import routes from './routes';
 
-export async function createProject(projectName) {
+export async function createProject(projectName, projectBaseUrl) {
     const response = await api_requests.post_request(routes.create, {
-        project_name: projectName
+        project_name: projectName,
+        project_base_url: projectBaseUrl
     });
 
     return response;

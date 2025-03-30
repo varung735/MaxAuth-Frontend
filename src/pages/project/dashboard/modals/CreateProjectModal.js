@@ -5,6 +5,7 @@ import { createProject, addSchema } from '../api/calls';
 
 function CreateProjectModal({ modal, setModal, snackBarState, snackBarMessage, popSnackBar }) {
   const [projectName, setProjectName] = useState('');
+  const [projectBaseUrl, setProjectBaseUrl] = useState('');
   const [inputFields, setInputFields] = useState([
     {
         id: 0,
@@ -36,7 +37,7 @@ function CreateProjectModal({ modal, setModal, snackBarState, snackBarMessage, p
       return acc;
     }, {});
 
-    const response = await createProject(projectName);
+    const response = await createProject(projectName, projectBaseUrl);
 
     snackBarState(response.success);
     snackBarMessage(response.message);
@@ -73,7 +74,7 @@ function CreateProjectModal({ modal, setModal, snackBarState, snackBarMessage, p
   }
   
   return (
-    <div className='h-full w-full bg-transparent_black absolute top-0 flex items-center justify-center'>
+    <div className='h-screen w-full bg-transparent_black absolute top-0 flex items-center justify-center'>
 
         <div className='max-height-[70vh] w-[95%] md:w-2/3 lg:w-1/3 bg-white'>
 
@@ -90,6 +91,12 @@ function CreateProjectModal({ modal, setModal, snackBarState, snackBarMessage, p
               placeholder='Enter Your Project Name Here'
               value={projectName}
               onChange={(e) => {setProjectName(e.target.value)}}
+              />
+            <input type="text"
+              className='w-full p-2 border rounded-md'
+              placeholder='Enter Your Project Base Url Here'
+              value={projectBaseUrl}
+              onChange={(e) => {setProjectBaseUrl(e.target.value)}}
               />
                 { inputFields && inputFields.map((field) => {
                     return <InputField key={field.id}
